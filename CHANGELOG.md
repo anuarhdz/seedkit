@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.0 (2026-04-03)
+
+- feat: add --config flag to all tools and array support for scrape ([2067419](https://github.com/anuarhdz/seedkit/commit/2067419))
+
 ## 0.2.0 (2026-04-03)
 
 - feat: add --help flag, transform-value and set-field-if operations; update docs ([df0a525](https://github.com/anuarhdz/seedkit/commit/df0a525))
