@@ -1,3 +1,5 @@
+declare const __SEEDKIT_VERSION__: string
+
 const COMMANDS = ["generate", "scrape", "transform"] as const
 type Command = (typeof COMMANDS)[number]
 
@@ -6,6 +8,11 @@ function isCommand(c: string | undefined): c is Command {
 }
 
 const cmd = process.argv[2]
+
+if (cmd === "--version" || cmd === "-v") {
+  console.log(__SEEDKIT_VERSION__)
+  process.exit(0)
+}
 
 if (!isCommand(cmd)) {
   if (cmd) {
@@ -20,6 +27,7 @@ Commands:
   transform   Batch-transform existing MDX files      (requires transform.config.ts)
 
 Options:
+  --version, -v     Print the version number
   --dry-run         Preview changes without writing files
   --skip-existing   Skip files that already exist (generate, scrape)
 `)

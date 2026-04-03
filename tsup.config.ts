@@ -1,5 +1,9 @@
 import { defineConfig } from "tsup"
 import path from "node:path"
+import { createRequire } from "node:module"
+
+const require = createRequire(import.meta.url)
+const { version } = require("./package.json") as { version: string }
 
 export default defineConfig({
   entry: {
@@ -22,6 +26,9 @@ export default defineConfig({
   esbuildOptions(options) {
     options.alias = {
       "@seedkit/core": path.resolve("packages/core/src/index.ts"),
+    }
+    options.define = {
+      __SEEDKIT_VERSION__: JSON.stringify(version),
     }
   },
   async onSuccess() {
