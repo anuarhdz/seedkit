@@ -24,6 +24,18 @@ export const ScrapeSchemaFieldSchema = z.union([
     type: z.literal("static"),
     value: z.union([z.string(), z.number(), z.boolean()]),
   }),
+  z.object({
+    type: z.literal("date"),
+    selector: z.string().min(1),
+  }),
+  z.object({
+    type: z.literal("richtext"),
+    selector: z.string().min(1),
+  }),
+  z.object({
+    type: z.literal("image"),
+    selector: z.string().min(1),
+  }),
 ])
 
 export const FollowConfigSchema = z.union([

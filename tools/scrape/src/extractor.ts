@@ -1,5 +1,8 @@
+import TurndownService from "turndown"
 import type { HTMLElement } from "node-html-parser"
 import type { DiscoveredPage, ScrapeSchemaField } from "./types.js"
+
+const td = new TurndownService({ headingStyle: "atx", codeBlockStyle: "fenced" })
 
 export function deriveSlug(discovered: DiscoveredPage, baseUrl: string): string {
   const raw = discovered.url.replace(baseUrl + "/", "").replace(/\//g, "-") || "index"
@@ -46,6 +49,40 @@ export function extractFields(
       }
       case "static": {
         fields[key] = field.value
+        break
+      }
+      case "date": {
+        const el = page.querySelector(field.selector)
+        if (!el) {
+          fields[key] = ""
+          break
+        }
+        const raw = el.getAttribute("datetime") ?? el.text?.trim() ?? ""
+        const parsed = new Date(raw)
+        fields[key] = isNaN(parsed.getTime()) ? raw : parsed.toISOString()
+        break
+      }
+      case "richtext": {
+        const el = page.querySelector(field.selector)
+        fields[key] = el ? td.turndown(el.outerHTML).trim() : ""
+        break
+      }
+      case "image": {
+        const el = page.querySelector(field.selector)
+        if (!el) {
+          fields[key] = { src: "", alt: "" }
+          break
+        }
+        const src = el.getAttribute("src") ?? ""
+        const result: Record<string, string | number> = {
+          src: src.startsWith("/") ? new URL(src, baseUrl).href : src,
+          alt: el.getAttribute("alt") ?? "",
+        }
+        const width = parseInt(el.getAttribute("width") ?? "", 10)
+        const height = parseInt(el.getAttribute("height") ?? "", 10)
+        if (!isNaN(width)) result.width = width
+        if (!isNaN(height)) result.height = height
+        fields[key] = result
         break
       }
     }

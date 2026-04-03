@@ -9,11 +9,19 @@ function yamlValue(value: SerializableValue, indent = 0): string {
   if (typeof value === "number") return String(value)
 
   if (typeof value === "string") {
-    const sanitized = value.replace(/\r/g, "").replace(/\n/g, " ")
+    const normalized = value.replace(/\r\n/g, "\n").replace(/\r/g, "\n")
+    if (normalized.includes("\n")) {
+      const contentIndent = " ".repeat(indent + 2)
+      const indented = normalized
+        .split("\n")
+        .map((line) => (line === "" ? "" : `${contentIndent}${line}`))
+        .join("\n")
+      return `|-\n${indented}`
+    }
     // Quote strings that could be misinterpreted as YAML
-    const needsQuotes = /[:#{}[\],&*?|<>=!%@`]/.test(sanitized) || /^\s|\s$/.test(sanitized)
-    if (needsQuotes) return `"${sanitized.replace(/"/g, '\\"')}"`
-    return sanitized
+    const needsQuotes = /[:#{}[\],&*?|<>=!%@`]/.test(normalized) || /^\s|\s$/.test(normalized)
+    if (needsQuotes) return `"${normalized.replace(/"/g, '\\"')}"`
+    return normalized
   }
 
   if (Array.isArray(value)) {
@@ -67,8 +75,11 @@ function jsValue(entry: FieldEntry): string {
   if (typeof value === "number") return String(value)
 
   if (typeof value === "string") {
-    const sanitized = value.replace(/\r/g, "").replace(/\n/g, " ")
-    return `'${sanitized.replaceAll("'", "\\'")}'`
+    const normalized = value.replace(/\r\n/g, "\n").replace(/\r/g, "\n")
+    if (normalized.includes("\n")) {
+      return `\`${normalized.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{/g, "\\${")}\``
+    }
+    return `'${normalized.replaceAll("'", "\\'")}'`
   }
 
   if (Array.isArray(value)) {

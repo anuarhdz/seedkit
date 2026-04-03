@@ -42,6 +42,67 @@ function generateField(field: SchemaField, resolved: ResolvedFields): Serializab
 
     case "object":
       return generateFields(field.fields, resolved)
+
+    case "image": {
+      const width = field.width ?? 800
+      const height = field.height ?? 600
+      const seed = faker.string.alphanumeric(8)
+      return {
+        src: `https://picsum.photos/seed/${seed}/${width}/${height}`,
+        width,
+        height,
+        alt: faker.lorem.words({ min: 2, max: 5 }),
+      }
+    }
+
+    case "richtext": {
+      const useHeadings = field.headings ?? true
+      const useLists = field.lists ?? true
+      const useBold = field.bold ?? true
+      const count = faker.number.int({
+        min: field.paragraphs?.min ?? 2,
+        max: field.paragraphs?.max ?? 4,
+      })
+      const blocks: string[] = []
+
+      if (useHeadings) {
+        blocks.push(`## ${faker.lorem.words({ min: 3, max: 6 })}`)
+        blocks.push("")
+      }
+
+      for (let i = 0; i < count; i++) {
+        let paragraph = faker.lorem.paragraph({ min: 2, max: 4 })
+        if (useBold && faker.datatype.boolean()) {
+          const words = paragraph.split(" ")
+          const idx = faker.number.int({ min: 0, max: words.length - 1 })
+          words[idx] = `**${words[idx]!.replace(/[.,]$/, "")}**`
+          paragraph = words.join(" ")
+        }
+        blocks.push(paragraph)
+        blocks.push("")
+      }
+
+      if (useLists) {
+        const itemCount = faker.number.int({ min: 2, max: 4 })
+        for (let i = 0; i < itemCount; i++) {
+          blocks.push(`- ${faker.lorem.sentence({ min: 3, max: 8 })}`)
+        }
+        blocks.push("")
+      }
+
+      return blocks.join("\n").trim()
+    }
+
+    case "number": {
+      const min = field.min ?? 0
+      const max = field.max ?? 100
+      const precision = field.precision ?? 0
+      if (precision === 0) return faker.number.int({ min, max })
+      return faker.number.float({ min, max, fractionDigits: precision })
+    }
+
+    case "boolean":
+      return faker.datatype.boolean({ probability: field.probability ?? 0.5 })
   }
 }
 

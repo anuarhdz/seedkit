@@ -38,6 +38,33 @@ export const SchemaFieldSchema: z.ZodType<SchemaField> = z.lazy(() =>
       type: z.literal("object"),
       fields: z.record(SchemaFieldSchema),
     }),
+    z.object({
+      type: z.literal("image"),
+      width: z.number().int().positive().optional(),
+      height: z.number().int().positive().optional(),
+    }),
+    z.object({
+      type: z.literal("richtext"),
+      headings: z.boolean().optional(),
+      lists: z.boolean().optional(),
+      bold: z.boolean().optional(),
+      paragraphs: z
+        .object({
+          min: z.number().int().positive().optional(),
+          max: z.number().int().positive().optional(),
+        })
+        .optional(),
+    }),
+    z.object({
+      type: z.literal("number"),
+      min: z.number().optional(),
+      max: z.number().optional(),
+      precision: z.number().int().nonnegative().optional(),
+    }),
+    z.object({
+      type: z.literal("boolean"),
+      probability: z.number().min(0).max(1).optional(),
+    }),
   ]),
 )
 

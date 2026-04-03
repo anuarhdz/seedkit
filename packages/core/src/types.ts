@@ -52,6 +52,32 @@ export interface ObjectField {
   fields: Record<string, SchemaField>
 }
 
+export interface ImageField {
+  type: "image"
+  width?: number
+  height?: number
+}
+
+export interface RichtextField {
+  type: "richtext"
+  headings?: boolean
+  lists?: boolean
+  bold?: boolean
+  paragraphs?: { min?: number; max?: number }
+}
+
+export interface NumberField {
+  type: "number"
+  min?: number
+  max?: number
+  precision?: number
+}
+
+export interface BooleanField {
+  type: "boolean"
+  probability?: number
+}
+
 export type SchemaField =
   | SentenceField
   | ParagraphField
@@ -61,6 +87,10 @@ export type SchemaField =
   | StaticField
   | SlugField
   | ObjectField
+  | ImageField
+  | RichtextField
+  | NumberField
+  | BooleanField
 
 // --- Collection ---
 

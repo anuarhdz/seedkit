@@ -34,12 +34,30 @@ export interface StaticScrapeField {
   value: string | number | boolean
 }
 
+export interface DateScrapeField {
+  type: "date"
+  selector: string
+}
+
+export interface RichtextScrapeField {
+  type: "richtext"
+  selector: string
+}
+
+export interface ImageScrapeField {
+  type: "image"
+  selector: string
+}
+
 export type ScrapeSchemaField =
   | SelectorField
   | UrlSlugField
   | NavSectionField
   | LinkOrderField
   | StaticScrapeField
+  | DateScrapeField
+  | RichtextScrapeField
+  | ImageScrapeField
 
 // --- Follow config ---
 
