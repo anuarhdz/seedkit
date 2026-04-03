@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## <small>0.1.3 (2026-04-03)</small>
+
+- fix: include url-slug fields in frontmatter output ([3ce43d4](https://github.com/anuarhdz/seedkit/commit/3ce43d4))
+
 ## <small>0.1.2 (2026-04-03)</small>
 
 - fix: derive image URL path from publicDir instead of hardcoding /content/ ([03cdb78](https://github.com/anuarhdz/seedkit/commit/03cdb78))
