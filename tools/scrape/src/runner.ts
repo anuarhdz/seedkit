@@ -108,8 +108,7 @@ export async function run(config: ScrapeConfig, options: RunOptions = {}): Promi
       const body = td.turndown(contentEl.outerHTML)
 
       const metaFields: Record<string, unknown> = {}
-      for (const [key, field] of Object.entries(config.schema)) {
-        if (field.type === "url-slug") continue
+      for (const [key] of Object.entries(config.schema)) {
         metaFields[key] = fields[key]
       }
       if (config.video) {
