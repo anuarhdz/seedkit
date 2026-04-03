@@ -20,6 +20,7 @@ npx seedkit scrape
 ```bash
 npx seedkit scrape --dry-run        # Discover pages and preview output paths without fetching
 npx seedkit scrape --skip-existing  # Skip pages whose output file already exists
+npx seedkit scrape --help           # Show available options
 
 # Run from the monorepo
 pnpm scrape
@@ -53,6 +54,8 @@ export default defineConfig({
   schema: {
     title: { type: "selector", selector: "h1", extract: "text" },
     slug: { type: "url-slug" },
+    publishedAt: { type: "date", selector: "time" },
+    cover: { type: "image", selector: "article img" },
   },
 
   content: {
@@ -98,25 +101,61 @@ follow: {
 
 Fields extracted from each page and written to the file header.
 
-| type          | description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| `selector`    | Extract `text` or an `attr` value via CSS selector          |
-| `url-slug`    | Derived from the page URL path                              |
-| `nav-section` | Section heading from the navigation (crawl + sections only) |
-| `link-order`  | Position of the page within its section                     |
-| `static`      | Fixed string, number, or boolean                            |
+| type          | options                        | description                                                 |
+| ------------- | ------------------------------ | ----------------------------------------------------------- |
+| `selector`    | `selector`, `extract`, `attr?` | Extract `text` or an `attr` value via CSS selector          |
+| `url-slug`    | —                              | Derived from the page URL path                              |
+| `nav-section` | —                              | Section heading from the navigation (crawl + sections only) |
+| `link-order`  | —                              | Position of the page within its section                     |
+| `static`      | `value`                        | Fixed string, number, or boolean                            |
+| `date`        | `selector`                     | Extract a date, returns ISO string                          |
+| `richtext`    | `selector`                     | Extract HTML content, converted to markdown                 |
+| `image`       | `selector`                     | Extract `{ src, width, height, alt }` from an `<img>`       |
+
+### `date`
+
+Finds the element and returns an ISO date string. Prefers the `datetime` attribute for `<time>` elements:
+
+```ts
+publishedAt: { type: "date", selector: "time.post-date" }
+// → "2024-03-15T10:00:00.000Z"
+```
+
+### `richtext`
+
+Extracts a section of the page as markdown. Useful for descriptions or sidebars that differ from the main body:
+
+```ts
+excerpt: { type: "richtext", selector: ".post-excerpt" }
+```
+
+### `image`
+
+Extracts `src`, `alt`, and optionally `width`/`height` from an `<img>` element. Relative URLs are resolved against `baseUrl`:
+
+```ts
+cover: { type: "image", selector: "article img:first-child" }
+```
+
+```yaml
+cover:
+  src: https://example.com/images/cover.jpg
+  alt: Cover image
+  width: 1200
+  height: 630
+```
 
 ## Images
 
 ```ts
 images: {
   download: true,
-  publicDir: "./public",  // images saved to publicDir/slug/images/
-  lightDark: true,        // pair .light.png / .dark.png into <Image> components
+  publicDir: "./public/posts",  // images saved to publicDir/slug/images/
+  lightDark: true,              // pair .light.png / .dark.png into <Image> components
 }
 ```
 
-Downloaded images are referenced in the Markdown body relative to `/content/slug/images/`.
+Downloaded images are referenced in the body relative to the `publicDir` URL path. For example, with `publicDir: "./public/posts"`, images are served at `/posts/slug/images/filename.png`.
 
 ## Video
 

@@ -20,6 +20,7 @@ npx seedkit generate
 ```bash
 npx seedkit generate --dry-run        # Preview output paths without writing files
 npx seedkit generate --skip-existing  # Skip files that already exist on disk
+npx seedkit generate --help           # Show available options
 
 # Run from the monorepo
 pnpm generate
@@ -50,6 +51,9 @@ export default defineConfig({
         date: { type: "date", from: "2023-01-01T00:00:00Z", to: "2025-12-31T23:59:59Z" },
         status: { type: "enum", values: ["draft", "published", "archived"] },
         tags: { type: "enum-array", pool: ["TypeScript", "React", "Next.js"], min: 1, max: 3 },
+        rating: { type: "number", min: 1, max: 5, precision: 1 },
+        featured: { type: "boolean", probability: 0.3 },
+        cover: { type: "image", width: 1200, height: 630 },
         slug: { type: "slug", from: "title" },
       },
       body: { paragraphs: { min: 2, max: 5 } },
@@ -62,18 +66,69 @@ export default defineConfig({
 
 ## Schema field types
 
-| type         | options                | description                      |
-| ------------ | ---------------------- | -------------------------------- |
-| `sentence`   | `min?`, `max?`         | Random lorem sentence            |
-| `paragraph`  | —                      | Random lorem paragraph           |
-| `date`       | `from?`, `to?`         | Random ISO date in range         |
-| `enum`       | `values`               | Random item from list            |
-| `enum-array` | `pool`, `min?`, `max?` | N random items from pool         |
-| `static`     | `value`                | Fixed string, number, or boolean |
-| `slug`       | `from`                 | Slugified value of another field |
-| `object`     | `fields`               | Nested schema, recursed          |
+| type         | options                                       | description                           |
+| ------------ | --------------------------------------------- | ------------------------------------- |
+| `sentence`   | `min?`, `max?`                                | Random lorem sentence                 |
+| `paragraph`  | —                                             | Random lorem paragraph                |
+| `date`       | `from?`, `to?`                                | Random ISO date in range              |
+| `enum`       | `values`                                      | Random item from list                 |
+| `enum-array` | `pool`, `min?`, `max?`                        | N random items from pool              |
+| `static`     | `value`                                       | Fixed string, number, or boolean      |
+| `slug`       | `from`                                        | Slugified value of another field      |
+| `object`     | `fields`                                      | Nested schema, recursed               |
+| `image`      | `width?`, `height?`                           | Object `{ src, width, height, alt }`  |
+| `richtext`   | `headings?`, `lists?`, `bold?`, `paragraphs?` | Markdown string with mixed formatting |
+| `number`     | `min?`, `max?`, `precision?`                  | Random number, integer or decimal     |
+| `boolean`    | `probability?`                                | Random boolean (default 50% true)     |
 
 `slug` fields are always resolved after all other fields, so `from` can reference any field in the same schema.
+
+### `image`
+
+Generates a Picsum placeholder URL with a random seed, plus `width`, `height`, and a random `alt` text:
+
+```ts
+cover: { type: "image", width: 1200, height: 630 }
+```
+
+```yaml
+cover:
+  src: https://picsum.photos/seed/a3f8b2c1/1200/630
+  width: 1200
+  height: 630
+  alt: lorem ipsum dolor
+```
+
+### `richtext`
+
+Generates a multiline markdown string with headings, paragraphs, bold inline text, and bullet lists. Serialized as a YAML block scalar in `frontmatter` format:
+
+```ts
+description: { type: "richtext", headings: true, lists: true, bold: true, paragraphs: { min: 2, max: 4 } }
+```
+
+```yaml
+description: |-
+  ## Lorem ipsum dolor
+
+  Sit amet **consectetur** adipiscing elit. Sed do eiusmod tempor.
+
+  - First item here
+  - Second item here
+```
+
+### `number`
+
+```ts
+rating: { type: "number", min: 1, max: 5, precision: 1 }  // e.g. 3.7
+views:  { type: "number", min: 0, max: 10000 }             // integer
+```
+
+### `boolean`
+
+```ts
+featured: { type: "boolean", probability: 0.3 }  // 30% chance of true
+```
 
 ## Output formats
 
@@ -83,6 +138,13 @@ export default defineConfig({
 export const metadata = {
   title: "Some Generated Title",
   date: new Date("2024-03-15T10:22:00.000Z"),
+  featured: false,
+  cover: {
+    src: "https://picsum.photos/seed/a3f8b2c1/1200/630",
+    width: 1200,
+    height: 630,
+    alt: "lorem ipsum",
+  },
 }
 
 Body content here...
@@ -94,6 +156,12 @@ Body content here...
 ---
 title: Some Generated Title
 date: "2024-03-15T10:22:00.000Z"
+featured: false
+cover:
+  src: https://picsum.photos/seed/a3f8b2c1/1200/630
+  width: 1200
+  height: 630
+  alt: lorem ipsum
 ---
 
 Body content here...

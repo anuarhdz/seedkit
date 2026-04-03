@@ -2,6 +2,13 @@ export type TransformOp =
   | { type: "rename-field"; from: string; to: string }
   | { type: "add-field"; key: string; value: string | number | boolean; overwrite?: boolean }
   | { type: "remove-field"; key: string }
+  | { type: "transform-value"; key: string; fn: (value: unknown) => unknown }
+  | {
+      type: "set-field-if"
+      key: string
+      value: string | number | boolean
+      when: { field: string; equals: string | number | boolean }
+    }
 
 export interface TransformOutput {
   /** Change the output format. If omitted, keeps the original file's format. */

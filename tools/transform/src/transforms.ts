@@ -25,6 +25,18 @@ export function applyOperations(
         delete result[op.key]
         break
       }
+      case "transform-value": {
+        if (op.key in result) {
+          result[op.key] = op.fn(result[op.key])
+        }
+        break
+      }
+      case "set-field-if": {
+        if (result[op.when.field] === op.when.equals) {
+          result[op.key] = op.value
+        }
+        break
+      }
     }
   }
 

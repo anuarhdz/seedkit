@@ -9,6 +9,20 @@ const TransformOpSchema = z.union([
     overwrite: z.boolean().optional(),
   }),
   z.object({ type: z.literal("remove-field"), key: z.string().min(1) }),
+  z.object({
+    type: z.literal("transform-value"),
+    key: z.string().min(1),
+    fn: z.function(),
+  }),
+  z.object({
+    type: z.literal("set-field-if"),
+    key: z.string().min(1),
+    value: z.union([z.string(), z.number(), z.boolean()]),
+    when: z.object({
+      field: z.string().min(1),
+      equals: z.union([z.string(), z.number(), z.boolean()]),
+    }),
+  }),
 ])
 
 export const TransformConfigSchema = z.object({

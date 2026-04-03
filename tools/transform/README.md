@@ -19,6 +19,7 @@ npx seedkit transform
 
 ```bash
 npx seedkit transform --dry-run  # Preview changes without writing files
+npx seedkit transform --help     # Show available options
 
 # Run from the monorepo
 pnpm transform
@@ -79,6 +80,24 @@ Removes a field entirely.
 
 ```ts
 { type: "remove-field", key: "draft" }
+```
+
+### `transform-value`
+
+Applies a function to the current value of a field. Skips if the field doesn't exist.
+
+```ts
+{ type: "transform-value", key: "title", fn: (v) => String(v).toUpperCase() }
+{ type: "transform-value", key: "date", fn: (v) => new Date(String(v)).toISOString() }
+```
+
+### `set-field-if`
+
+Sets a field to a value only when another field matches an expected value. Useful for conditional migrations.
+
+```ts
+{ type: "set-field-if", key: "status", value: "published", when: { field: "draft", equals: false } }
+{ type: "set-field-if", key: "visible", value: true, when: { field: "status", equals: "published" } }
 ```
 
 ## Format detection
