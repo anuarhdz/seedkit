@@ -7,6 +7,17 @@ Generates fake MDX files from a schema using [Faker](https://fakerjs.dev/). Usef
 ```bash
 # Run via npx (no install required)
 npx seedkit generate
+```
+
+> **TypeScript types in your editor:** Install `seedkit` as a dev dependency so your IDE resolves the `defineConfig` import:
+>
+> ```bash
+> pnpm add -D seedkit
+> ```
+>
+> This is optional — the CLI works without it.
+
+```bash
 npx seedkit generate --dry-run        # Preview output paths without writing files
 npx seedkit generate --skip-existing  # Skip files that already exist on disk
 

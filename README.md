@@ -98,6 +98,14 @@ export default defineConfig({
 
 - Node.js >= 18
 
+> **TypeScript types in your editor:** Install `seedkit` as a dev dependency so your IDE resolves `defineConfig` imports in config files:
+>
+> ```bash
+> pnpm add -D seedkit
+> ```
+>
+> This is optional — the CLI works with `npx` without installing anything.
+
 ## Development
 
 Clone the repo and install dependencies:
