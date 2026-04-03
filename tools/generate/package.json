@@ -1,5 +1,5 @@
 {
-  "name": "@mdx-tools/generate",
+  "name": "@seedkit/generate",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
-    "@mdx-tools/core": "workspace:*"
+    "@seedkit/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "*"

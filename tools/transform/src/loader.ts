@@ -12,7 +12,7 @@ export async function loadConfig(cwd: string): Promise<TransformConfig> {
     throw new Error(
       `No transform.config.ts found in ${cwd}\n` +
         `Create one with:\n\n` +
-        `  import { defineConfig } from "@mdx-tools/transform"\n\n` +
+        `  import { defineConfig } from "@seedkit/transform"\n\n` +
         `  export default defineConfig({ input: "./**/*.mdx", operations: [...] })\n`,
     )
   }

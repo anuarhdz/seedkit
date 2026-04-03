@@ -12,7 +12,7 @@ export async function loadConfig(cwd: string): Promise<ScrapeConfig> {
     throw new Error(
       `No scrape.config.ts found in ${cwd}\n` +
         `Create one with:\n\n` +
-        `  import { defineConfig } from "@mdx-tools/scrape"\n\n` +
+        `  import { defineConfig } from "@seedkit/scrape"\n\n` +
         `  export default defineConfig({ startUrl: "...", ... })\n`,
     )
   }

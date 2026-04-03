@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { OutputConfigSchema } from "@mdx-tools/core"
+import { OutputConfigSchema } from "@seedkit/core"
 
 const pattern = z.custom<RegExp>((val) => val instanceof RegExp, {
   message: "Must be a RegExp instance",

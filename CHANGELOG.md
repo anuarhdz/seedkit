@@ -10,10 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - pnpm monorepo with TypeScript strict mode, ESLint 9 flat config, Prettier, Commitlint, and Husky git hooks
-- **`@mdx-tools/core`** — shared package with types, serializers, and file writer used by all tools
-- **`@mdx-tools/generate`** — configurable fake MDX generator replacing three legacy tools (`mdx-cli`, `mdx-generator`, `next-mdx`)
-- **`@mdx-tools/scrape`** — configurable web scraper with sitemap discovery, image/video download, and Zod config validation
-- **`@mdx-tools/transform`** — batch-transform MDX frontmatter/metadata fields with format conversion support
+- **`@seedkit/core`** — shared package with types, serializers, and file writer used by all tools
+- **`@seedkit/generate`** — configurable fake MDX generator replacing three legacy tools (`mdx-cli`, `mdx-generator`, `next-mdx`)
+- **`@seedkit/scrape`** — configurable web scraper with sitemap discovery, image/video download, and Zod config validation
+- **`@seedkit/transform`** — batch-transform MDX frontmatter/metadata fields with format conversion support
 - Root convenience scripts: `pnpm generate`, `pnpm scrape`, `pnpm transform`
 - `--dry-run` and `--skip-existing` flags for `generate` and `scrape`
 - Sitemap discovery in `scrape` (supports sitemap index recursion up to 3 levels)
@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>Implementation notes</summary>
 
-- `@mdx-tools/core` is a workspace package consumed via `workspace:*` — no publishing required
+- `@seedkit/core` is a workspace package consumed via `workspace:*` — no publishing required
 - `tsx` runs all tools directly without a build step in development
 - Zod v3 for config validation in `generate` and `scrape`; recursive schemas use `z.lazy()` with explicit `z.ZodType<T>` annotation
 - Sitemap XML parsed with regex (`<loc>` extraction) instead of `node-html-parser` to avoid namespace mangling

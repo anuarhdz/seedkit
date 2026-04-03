@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker"
-import type { SchemaField, SerializableValue } from "@mdx-tools/core"
+import type { SchemaField, SerializableValue } from "@seedkit/core"
 import { slugify } from "./slugify.js"
 
 type ResolvedFields = Record<string, SerializableValue>

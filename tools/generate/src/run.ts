@@ -1,18 +1,14 @@
 import { access } from "node:fs/promises"
 import { join } from "node:path"
 import { faker } from "@faker-js/faker"
-import {
-  serializeToFrontmatter,
-  serializeToMetadataExport,
-  writeContentFile,
-} from "@mdx-tools/core"
+import { serializeToFrontmatter, serializeToMetadataExport, writeContentFile } from "@seedkit/core"
 import type {
   CollectionConfig,
   FieldEntry,
   GenerateConfig,
   OutputConfig,
   SerializableRecord,
-} from "@mdx-tools/core"
+} from "@seedkit/core"
 import { generateFields } from "./generator.js"
 
 export interface RunOptions {

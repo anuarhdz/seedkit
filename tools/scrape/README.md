@@ -1,4 +1,4 @@
-# @mdx-tools/scrape
+# @seedkit/scrape
 
 Scrapes web pages and converts them to MDX files. Supports crawling by CSS selector or discovering pages from a sitemap. Useful for importing documentation, blogs, or course content as local MDX demo data.
 
@@ -19,7 +19,7 @@ pnpm scrape -- --skip-existing  # Skip pages whose output file already exists
 
 ```ts
 // scrape.config.ts
-import { defineConfig } from "@mdx-tools/scrape"
+import { defineConfig } from "@seedkit/scrape"
 
 export default defineConfig({
   startUrl: "https://example.com/docs",

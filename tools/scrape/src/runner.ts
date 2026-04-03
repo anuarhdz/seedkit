@@ -1,11 +1,7 @@
 import { access, mkdir } from "node:fs/promises"
 import { join } from "node:path"
-import {
-  serializeToFrontmatter,
-  serializeToMetadataExport,
-  writeContentFile,
-} from "@mdx-tools/core"
-import type { FieldEntry, OutputConfig, SerializableRecord } from "@mdx-tools/core"
+import { serializeToFrontmatter, serializeToMetadataExport, writeContentFile } from "@seedkit/core"
+import type { FieldEntry, OutputConfig, SerializableRecord } from "@seedkit/core"
 import { discoverPages } from "./discovery.js"
 import { deriveSlug, extractFields } from "./extractor.js"
 import { downloadVideo, processImages } from "./downloader.js"

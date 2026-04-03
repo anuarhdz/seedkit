@@ -1,5 +1,5 @@
 {
-  "name": "@mdx-tools/scrape",
+  "name": "@seedkit/scrape",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mdx-tools/core": "workspace:*",
+    "@seedkit/core": "workspace:*",
     "node-html-parser": "^6.1.13",
     "turndown": "^7.2.0",
     "zod": "^3.24.0"

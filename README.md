@@ -4,12 +4,12 @@ A pnpm monorepo of CLI tools for generating and transforming MDX content — pri
 
 ## Packages
 
-| Package                | Path              | Description                                       |
-| ---------------------- | ----------------- | ------------------------------------------------- |
-| `@mdx-tools/core`      | `packages/core`   | Shared types, serializers, and file writer        |
-| `@mdx-tools/generate`  | `tools/generate`  | Generate fake MDX files from a schema using Faker |
-| `@mdx-tools/scrape`    | `tools/scrape`    | Scrape web pages and convert them to MDX          |
-| `@mdx-tools/transform` | `tools/transform` | Batch-transform existing MDX frontmatter/metadata |
+| Package              | Path              | Description                                       |
+| -------------------- | ----------------- | ------------------------------------------------- |
+| `@seedkit/core`      | `packages/core`   | Shared types, serializers, and file writer        |
+| `@seedkit/generate`  | `tools/generate`  | Generate fake MDX files from a schema using Faker |
+| `@seedkit/scrape`    | `tools/scrape`    | Scrape web pages and convert them to MDX          |
+| `@seedkit/transform` | `tools/transform` | Batch-transform existing MDX frontmatter/metadata |
 
 ## Requirements
 

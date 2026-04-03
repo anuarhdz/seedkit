@@ -1,5 +1,5 @@
 {
-  "name": "@mdx-tools/transform",
+  "name": "@seedkit/transform",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mdx-tools/core": "workspace:*",
+    "@seedkit/core": "workspace:*",
     "glob": "^11.0.0",
     "js-yaml": "^4.1.0",
     "zod": "^3.24.0"

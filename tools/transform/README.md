@@ -1,4 +1,4 @@
-# @mdx-tools/transform
+# @seedkit/transform
 
 Batch-transforms MDX/MD files by renaming, adding, or removing frontmatter/metadata fields. Supports both `frontmatter` (YAML) and `metadata-export` (JS) formats and can convert between them.
 
@@ -21,7 +21,7 @@ pnpm transform -- --dry-run
 
 ```ts
 // transform.config.ts
-import { defineConfig } from "@mdx-tools/transform"
+import { defineConfig } from "@seedkit/transform"
 
 export default defineConfig({
   input: "./content/**/*.mdx",

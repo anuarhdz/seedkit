@@ -40,9 +40,9 @@ pnpm scrape   -- --skip-existing
 You can also run tools directly from their package:
 
 ```bash
-pnpm --filter @mdx-tools/generate dev
-pnpm --filter @mdx-tools/scrape scrape
-pnpm --filter @mdx-tools/transform transform
+pnpm --filter @seedkit/generate dev
+pnpm --filter @seedkit/scrape scrape
+pnpm --filter @seedkit/transform transform
 ```
 
 ## Type checking
@@ -52,7 +52,7 @@ pnpm --filter @mdx-tools/transform transform
 pnpm typecheck
 
 # Check a single package
-pnpm --filter @mdx-tools/scrape typecheck
+pnpm --filter @seedkit/scrape typecheck
 ```
 
 ## Linting & formatting

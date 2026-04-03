@@ -1,4 +1,4 @@
-# @mdx-tools/generate
+# @seedkit/generate
 
 Generates fake MDX files from a schema using [Faker](https://fakerjs.dev/). Useful for seeding demo content in local development.
 
@@ -19,7 +19,7 @@ pnpm generate -- --skip-existing  # Skip files that already exist on disk
 
 ```ts
 // generate.config.ts
-import { defineConfig } from "@mdx-tools/core"
+import { defineConfig } from "@seedkit/core"
 
 export default defineConfig({
   collections: [

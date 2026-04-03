@@ -1,7 +1,7 @@
 import { access } from "node:fs/promises"
 import { join, resolve } from "node:path"
-import { GenerateConfigSchema } from "@mdx-tools/core"
-import type { GenerateConfig } from "@mdx-tools/core"
+import { GenerateConfigSchema } from "@seedkit/core"
+import type { GenerateConfig } from "@seedkit/core"
 
 export async function loadConfig(cwd: string): Promise<GenerateConfig> {
   const configPath = resolve(join(cwd, "generate.config.ts"))
@@ -12,7 +12,7 @@ export async function loadConfig(cwd: string): Promise<GenerateConfig> {
     throw new Error(
       `No generate.config.ts found in ${cwd}\n` +
         `Create one with:\n\n` +
-        `  import { defineConfig } from "@mdx-tools/core"\n\n` +
+        `  import { defineConfig } from "@seedkit/core"\n\n` +
         `  export default defineConfig({ collections: [...] })\n`,
     )
   }

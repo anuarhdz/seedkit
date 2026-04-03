@@ -1,4 +1,4 @@
-import { defineConfig } from "@mdx-tools/core"
+import { defineConfig } from "@seedkit/core"
 
 export default defineConfig({
   collections: [

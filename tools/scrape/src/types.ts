@@ -1,4 +1,4 @@
-import type { OutputConfig } from "@mdx-tools/core"
+import type { OutputConfig } from "@seedkit/core"
 
 // --- Schema fields ---
 

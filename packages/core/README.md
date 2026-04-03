@@ -1,6 +1,6 @@
-# @mdx-tools/core
+# @seedkit/core
 
-Shared package used internally by all `@mdx-tools/*` tools. Provides types, serializers, and a file writer.
+Shared package used internally by all `@seedkit/*` tools. Provides types, serializers, and a file writer.
 
 ## Exports
 
@@ -14,7 +14,7 @@ import type {
   GenerateConfig,
   SerializableRecord,
   FieldEntry,
-} from "@mdx-tools/core"
+} from "@seedkit/core"
 ```
 
 #### `OutputConfig`
@@ -32,7 +32,7 @@ interface OutputConfig {
 
 #### `SchemaField`
 
-Discriminated union of field types used by `@mdx-tools/generate`:
+Discriminated union of field types used by `@seedkit/generate`:
 
 | type         | description                                       |
 | ------------ | ------------------------------------------------- |
@@ -48,7 +48,7 @@ Discriminated union of field types used by `@mdx-tools/generate`:
 ### Serializers
 
 ```ts
-import { serializeToFrontmatter, serializeToMetadataExport } from "@mdx-tools/core"
+import { serializeToFrontmatter, serializeToMetadataExport } from "@seedkit/core"
 ```
 
 - `serializeToFrontmatter(record)` → YAML frontmatter block (`---\n...\n---\n`)
@@ -59,7 +59,7 @@ Both sanitize newlines in string values to prevent injection into the generated 
 ### File writer
 
 ```ts
-import { writeContentFile } from "@mdx-tools/core"
+import { writeContentFile } from "@seedkit/core"
 
 await writeContentFile({ slug, header, body, output })
 ```
@@ -69,7 +69,7 @@ Creates the output directory if needed and writes `header + "\n" + body` to the 
 ### Zod schemas
 
 ```ts
-import { OutputConfigSchema } from "@mdx-tools/core"
+import { OutputConfigSchema } from "@seedkit/core"
 ```
 
 Exported for use in tool-level config validators.
@@ -77,7 +77,7 @@ Exported for use in tool-level config validators.
 ### `defineConfig`
 
 ```ts
-import { defineConfig } from "@mdx-tools/core"
+import { defineConfig } from "@seedkit/core"
 ```
 
 Identity helper for `generate.config.ts` — provides TypeScript inference with no runtime cost.
