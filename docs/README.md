@@ -16,3 +16,7 @@
 ## Guides
 
 - [Local setup](./guides/local-setup.md)
+
+## Roadmap
+
+- [Roadmap](./roadmap.md)

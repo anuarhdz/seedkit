@@ -1,9 +1,11 @@
 import { access } from "node:fs/promises"
+import { fileURLToPath } from "node:url"
 import { join, resolve } from "node:path"
+import { createJiti } from "jiti"
 import { TransformConfigSchema } from "./schemas.js"
 import type { TransformConfig } from "./types.js"
 
-export async function loadConfig(cwd: string): Promise<TransformConfig> {
+export async function loadConfig(cwd: string, seedkitApiUrl?: URL): Promise<TransformConfig> {
   const configPath = resolve(join(cwd, "transform.config.ts"))
 
   try {
@@ -12,12 +14,16 @@ export async function loadConfig(cwd: string): Promise<TransformConfig> {
     throw new Error(
       `No transform.config.ts found in ${cwd}\n` +
         `Create one with:\n\n` +
-        `  import { defineConfig } from "@seedkit/transform"\n\n` +
+        `  import { defineConfig } from "seedkit/transform"\n\n` +
         `  export default defineConfig({ input: "./**/*.mdx", operations: [...] })\n`,
     )
   }
 
-  const mod = (await import(configPath)) as { default?: unknown }
+  const alias: Record<string, string> = seedkitApiUrl
+    ? { "seedkit/transform": fileURLToPath(seedkitApiUrl) }
+    : {}
+  const jiti = createJiti(import.meta.url, { alias })
+  const mod = (await jiti.import(configPath)) as { default?: unknown }
   const result = TransformConfigSchema.safeParse(mod.default)
 
   if (!result.success) {

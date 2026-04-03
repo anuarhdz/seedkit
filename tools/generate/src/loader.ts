@@ -1,9 +1,11 @@
 import { access } from "node:fs/promises"
+import { fileURLToPath } from "node:url"
 import { join, resolve } from "node:path"
+import { createJiti } from "jiti"
 import { GenerateConfigSchema } from "@seedkit/core"
 import type { GenerateConfig } from "@seedkit/core"
 
-export async function loadConfig(cwd: string): Promise<GenerateConfig> {
+export async function loadConfig(cwd: string, seedkitApiUrl?: URL): Promise<GenerateConfig> {
   const configPath = resolve(join(cwd, "generate.config.ts"))
 
   try {
@@ -12,12 +14,16 @@ export async function loadConfig(cwd: string): Promise<GenerateConfig> {
     throw new Error(
       `No generate.config.ts found in ${cwd}\n` +
         `Create one with:\n\n` +
-        `  import { defineConfig } from "@seedkit/core"\n\n` +
+        `  import { defineConfig } from "seedkit/generate"\n\n` +
         `  export default defineConfig({ collections: [...] })\n`,
     )
   }
 
-  const mod = (await import(configPath)) as { default?: unknown }
+  const alias: Record<string, string> = seedkitApiUrl
+    ? { "seedkit/generate": fileURLToPath(seedkitApiUrl) }
+    : {}
+  const jiti = createJiti(import.meta.url, { alias })
+  const mod = (await jiti.import(configPath)) as { default?: unknown }
   const result = GenerateConfigSchema.safeParse(mod.default)
 
   if (!result.success) {
