@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.1.0 (2026-04-03)
+
+- docs: update READMEs and guides for npx usage pattern ([d14c4a8](https://github.com/anuarhdz/seedkit/commit/d14c4a8))
+- feat: add publishable CLI via tsup + jiti ([b6b1783](https://github.com/anuarhdz/seedkit/commit/b6b1783))
+- chore: add label schema field - scrape ([91937f2](https://github.com/anuarhdz/seedkit/commit/91937f2))
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
