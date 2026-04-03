@@ -18,9 +18,10 @@ npx seedkit generate
 > This is optional — the CLI works without it.
 
 ```bash
-npx seedkit generate --dry-run        # Preview output paths without writing files
-npx seedkit generate --skip-existing  # Skip files that already exist on disk
-npx seedkit generate --help           # Show available options
+npx seedkit generate --dry-run                        # Preview output paths without writing files
+npx seedkit generate --skip-existing                  # Skip files that already exist on disk
+npx seedkit generate --config my.generate.config.ts  # Use a custom config file
+npx seedkit generate --help                           # Show available options
 
 # Run from the monorepo
 pnpm generate

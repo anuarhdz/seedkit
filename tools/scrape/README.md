@@ -18,9 +18,10 @@ npx seedkit scrape
 > This is optional — the CLI works without it.
 
 ```bash
-npx seedkit scrape --dry-run        # Discover pages and preview output paths without fetching
-npx seedkit scrape --skip-existing  # Skip pages whose output file already exists
-npx seedkit scrape --help           # Show available options
+npx seedkit scrape --dry-run                      # Discover pages and preview output paths without fetching
+npx seedkit scrape --skip-existing                # Skip pages whose output file already exists
+npx seedkit scrape --config my.scrape.config.ts  # Use a custom config file
+npx seedkit scrape --help                         # Show available options
 
 # Run from the monorepo
 pnpm scrape
@@ -64,6 +65,40 @@ export default defineConfig({
 
   delay: 500, // ms between requests
 })
+```
+
+## Multiple sources
+
+Export an array from the config file to scrape multiple sites in one run:
+
+```ts
+export default defineConfig([
+  {
+    startUrl: "https://site-a.com",
+    follow: { type: "sitemap", url: "https://site-a.com/sitemap.xml" },
+    output: { dir: "./content/site-a", ext: "mdx", format: "frontmatter", structure: "index" },
+    schema: {
+      title: { type: "selector", selector: "h1", extract: "text" },
+      slug: { type: "url-slug" },
+    },
+  },
+  {
+    startUrl: "https://site-b.com",
+    follow: { type: "sitemap", url: "https://site-b.com/sitemap.xml" },
+    output: { dir: "./content/site-b", ext: "mdx", format: "frontmatter", structure: "index" },
+    schema: {
+      title: { type: "selector", selector: "h1", extract: "text" },
+      slug: { type: "url-slug" },
+    },
+  },
+])
+```
+
+Each config runs sequentially. You can also use `--config` to point to any named config file:
+
+```bash
+npx seedkit scrape --config scrape.blog.config.ts
+npx seedkit scrape --config scrape.docs.config.ts
 ```
 
 ## Page discovery

@@ -5,14 +5,21 @@ import { createJiti } from "jiti"
 import { TransformConfigSchema } from "./schemas.js"
 import type { TransformConfig } from "./types.js"
 
-export async function loadConfig(cwd: string, seedkitApiUrl?: URL): Promise<TransformConfig> {
-  const configPath = resolve(join(cwd, "transform.config.ts"))
+export async function loadConfig(
+  cwd: string,
+  seedkitApiUrl?: URL,
+  configFile?: string,
+): Promise<TransformConfig> {
+  const configPath = configFile
+    ? resolve(cwd, configFile)
+    : resolve(join(cwd, "transform.config.ts"))
+  const configName = configFile ?? "transform.config.ts"
 
   try {
     await access(configPath)
   } catch {
     throw new Error(
-      `No transform.config.ts found in ${cwd}\n` +
+      `No ${configName} found in ${cwd}\n` +
         `Create one with:\n\n` +
         `  import { defineConfig } from "seedkit/transform"\n\n` +
         `  export default defineConfig({ input: "./**/*.mdx", operations: [...] })\n`,

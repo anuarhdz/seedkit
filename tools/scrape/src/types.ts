@@ -125,6 +125,6 @@ export interface DiscoveredPage {
   order: number
 }
 
-export function defineConfig(config: ScrapeConfig): ScrapeConfig {
+export function defineConfig(config: ScrapeConfig | ScrapeConfig[]): ScrapeConfig | ScrapeConfig[] {
   return config
 }

@@ -5,14 +5,21 @@ import { createJiti } from "jiti"
 import { GenerateConfigSchema } from "@seedkit/core"
 import type { GenerateConfig } from "@seedkit/core"
 
-export async function loadConfig(cwd: string, seedkitApiUrl?: URL): Promise<GenerateConfig> {
-  const configPath = resolve(join(cwd, "generate.config.ts"))
+export async function loadConfig(
+  cwd: string,
+  seedkitApiUrl?: URL,
+  configFile?: string,
+): Promise<GenerateConfig> {
+  const configPath = configFile
+    ? resolve(cwd, configFile)
+    : resolve(join(cwd, "generate.config.ts"))
+  const configName = configFile ?? "generate.config.ts"
 
   try {
     await access(configPath)
   } catch {
     throw new Error(
-      `No generate.config.ts found in ${cwd}\n` +
+      `No ${configName} found in ${cwd}\n` +
         `Create one with:\n\n` +
         `  import { defineConfig } from "seedkit/generate"\n\n` +
         `  export default defineConfig({ collections: [...] })\n`,

@@ -4,10 +4,12 @@ import { run } from "../tools/generate/src/run.js"
 const args = process.argv.slice(3)
 const dryRun = args.includes("--dry-run")
 const skipExisting = args.includes("--skip-existing")
+const configIndex = args.indexOf("--config")
+const configFile = configIndex !== -1 ? args[configIndex + 1] : undefined
 const seedkitApiUrl = new URL("./generate-api.js", import.meta.url)
 
 async function main(): Promise<void> {
-  const config = await loadConfig(process.cwd(), seedkitApiUrl)
+  const config = await loadConfig(process.cwd(), seedkitApiUrl, configFile)
   await run(config, { dryRun, skipExisting })
 }
 

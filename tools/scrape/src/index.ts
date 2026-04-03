@@ -7,8 +7,11 @@ const dryRun = args.includes("--dry-run")
 const skipExisting = args.includes("--skip-existing")
 
 async function main(): Promise<void> {
-  const config = await loadConfig(process.cwd())
-  await run(config, { dryRun, skipExisting })
+  const configs = await loadConfig(process.cwd())
+  const configArray = Array.isArray(configs) ? configs : [configs]
+  for (const config of configArray) {
+    await run(config, { dryRun, skipExisting })
+  }
 }
 
 main().catch((err: unknown) => {

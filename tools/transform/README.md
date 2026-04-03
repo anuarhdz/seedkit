@@ -18,8 +18,9 @@ npx seedkit transform
 > This is optional — the CLI works without it.
 
 ```bash
-npx seedkit transform --dry-run  # Preview changes without writing files
-npx seedkit transform --help     # Show available options
+npx seedkit transform --dry-run                          # Preview changes without writing files
+npx seedkit transform --config my.transform.config.ts   # Use a custom config file
+npx seedkit transform --help                             # Show available options
 
 # Run from the monorepo
 pnpm transform

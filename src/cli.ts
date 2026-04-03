@@ -14,6 +14,7 @@ const HELP: Record<Command, string> = {
   Requires generate.config.ts in the current directory.
 
 Options:
+  --config <file>   Use a custom config file instead of generate.config.ts
   --dry-run         Preview output paths without writing files
   --skip-existing   Skip files that already exist on disk
   --help, -h        Show this help message
@@ -22,8 +23,10 @@ Options:
 
   Scrapes web pages and converts them to MDX files.
   Requires scrape.config.ts in the current directory.
+  Config can export a single config object or an array to scrape multiple sites.
 
 Options:
+  --config <file>   Use a custom config file instead of scrape.config.ts
   --dry-run         Discover pages and preview output paths without fetching
   --skip-existing   Skip pages whose output file already exists
   --help, -h        Show this help message
@@ -34,6 +37,7 @@ Options:
   Requires transform.config.ts in the current directory.
 
 Options:
+  --config <file>   Use a custom config file instead of transform.config.ts
   --dry-run         Preview changes without writing files
   --help, -h        Show this help message
 `,
@@ -67,6 +71,7 @@ Commands:
 Options:
   --version, -v     Print the version number
   --help, -h        Show this help message
+  --config <file>   Use a custom config file
   --dry-run         Preview changes without writing files
   --skip-existing   Skip files that already exist (generate, scrape)
 
