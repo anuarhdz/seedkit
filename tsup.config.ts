@@ -18,6 +18,13 @@ export default defineConfig({
   format: ["esm"],
   target: "node18",
   outDir: "dist",
+  dts: {
+    entry: {
+      "generate-api": "src/generate-api.ts",
+      "scrape-api": "src/scrape-api.ts",
+      "transform-api": "src/transform-api.ts",
+    },
+  },
   splitting: false,
   clean: true,
   banner: { js: "#!/usr/bin/env node" },
