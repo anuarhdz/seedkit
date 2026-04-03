@@ -5,7 +5,16 @@
 `npx seedkit generate|scrape|transform` funciona desde cualquier proyecto.
 Config files importan `from "seedkit/generate"` etc. `@seedkit/core` permanece workspace-only y se bundlea con tsup.
 
-## 2. Más field types en `generate`
+## 2. Flag `--version` / `-v`
+
+Muestra la versión actual del CLI instalado.
+
+```bash
+npx seedkit --version
+npx seedkit -v
+```
+
+## 3. Más field types en `generate`
 
 Tipos de campo adicionales para cubrir casos de uso más ricos:
 
@@ -16,7 +25,7 @@ Tipos de campo adicionales para cubrir casos de uso más ricos:
 | `number`   | Rango numérico con `min`/`max` y `precision`               |
 | `boolean`  | Con `probability` configurable (ej. 0.3 = 30% true)        |
 
-## 3. Watcher para `generate`
+## 4. Watcher para `generate`
 
 Flag `--watch` que observa cambios en `generate.config.ts` y regenera los archivos automáticamente. Útil para ajustar schemas en caliente durante el desarrollo.
 
@@ -24,7 +33,7 @@ Flag `--watch` que observa cambios en `generate.config.ts` y regenera los archiv
 npx seedkit generate --watch
 ```
 
-## 4. Más operaciones en `transform`
+## 5. Más operaciones en `transform`
 
 Operaciones adicionales para casos más avanzados:
 
@@ -33,7 +42,7 @@ Operaciones adicionales para casos más avanzados:
 | `transform-value` | Aplica una función al valor de un campo existente        |
 | `set-field-if`    | `add-field` condicional basado en el valor de otro campo |
 
-## 5. Scrape con autenticación
+## 6. Scrape con autenticación
 
 Soporte para scrapear sitios que requieren login — dashboards, docs privados, contenido tras paywall.
 
@@ -45,7 +54,7 @@ auth: {
 }
 ```
 
-## 6. Studio — UI visual local
+## 7. Studio — UI visual local
 
 Servidor local (`http://localhost:3456`) con interfaz web para gestionar el contenido sin tocar la terminal:
 
