@@ -2,6 +2,10 @@ import TurndownService from "turndown"
 import type { HTMLElement } from "node-html-parser"
 import type { ImagesConfig } from "./types.js"
 
+function publicUrlPrefix(publicDir: string): string {
+  return publicDir.replace(/^\.\//, "").replace(/^public/, "")
+}
+
 export function createTurndown(images?: ImagesConfig): TurndownService {
   const td = new TurndownService({
     headingStyle: "atx",
@@ -9,6 +13,8 @@ export function createTurndown(images?: ImagesConfig): TurndownService {
   })
 
   if (images?.download) {
+    const urlPrefix = publicUrlPrefix(images.publicDir)
+
     td.addRule("images", {
       filter: "img",
       replacement: (_content, node) => {
@@ -21,7 +27,7 @@ export function createTurndown(images?: ImagesConfig): TurndownService {
         const src = el.getAttribute("data-original-src") ?? el.getAttribute("src") ?? ""
         const filename = src.split("/").pop() ?? ""
         const darkSrc = el.getAttribute("data-dark-src") ?? ""
-        const basePath = `/content/${slug}/images`
+        const basePath = `${urlPrefix}/${slug}/images`
 
         if (darkSrc) {
           const darkFilename = darkSrc.split("/").pop() ?? ""
