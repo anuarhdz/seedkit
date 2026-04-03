@@ -1,0 +1,21 @@
+{
+  "name": "@mdx-tools/scrape",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.js",
+  "scripts": {
+    "scrape": "tsx src/index.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mdx-tools/core": "workspace:*",
+    "node-html-parser": "^6.1.13",
+    "turndown": "^7.2.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/turndown": "^5.0.6"
+  }
+}
