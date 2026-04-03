@@ -4,22 +4,23 @@ Generates fake MDX files from a schema using [Faker](https://fakerjs.dev/). Usef
 
 ## Usage
 
-Create a `generate.config.ts` in the directory where you want to run the tool, then:
-
 ```bash
-# From repo root
-pnpm generate
+# Run via npx (no install required)
+npx seedkit generate
+npx seedkit generate --dry-run        # Preview output paths without writing files
+npx seedkit generate --skip-existing  # Skip files that already exist on disk
 
-# With flags
-pnpm generate -- --dry-run        # Preview output paths without writing files
-pnpm generate -- --skip-existing  # Skip files that already exist on disk
+# Run from the monorepo
+pnpm generate
 ```
 
 ## Config
 
+Create a `generate.config.ts` in the directory where you want to run the command:
+
 ```ts
 // generate.config.ts
-import { defineConfig } from "@seedkit/core"
+import { defineConfig } from "seedkit/generate"
 
 export default defineConfig({
   collections: [
@@ -45,6 +46,8 @@ export default defineConfig({
   ],
 })
 ```
+
+> When working inside the monorepo, you can also import from `@seedkit/core` instead of `seedkit/generate`.
 
 ## Schema field types
 
@@ -87,7 +90,7 @@ Body content here...
 
 ## Config validation
 
-The config is validated with Zod on load. Field-level errors are reported with their path, e.g.:
+The config is validated with Zod on load. Field-level errors are reported with their path:
 
 ```
 Config error at collections[0].schema.slug.from: Required

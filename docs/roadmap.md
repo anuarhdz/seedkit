@@ -1,20 +1,9 @@
 # Roadmap
 
-## 1. `npx seedkit` — CLI publicable _(en progreso)_
+## 1. ~~`npx seedkit` — CLI publicable~~ ✅
 
-Actualmente hay que clonar el repo para usar las herramientas. El objetivo es que cualquier proyecto pueda correr:
-
-```bash
-npx seedkit generate
-npx seedkit scrape
-npx seedkit transform
-```
-
-Esto implica:
-
-- Un package `@seedkit/cli` como entry point unificado
-- Compilar y publicar los packages en npm bajo el scope `@seedkit`
-- `@seedkit/core` pasa a ser una dependencia pública
+`npx seedkit generate|scrape|transform` funciona desde cualquier proyecto.
+Config files importan `from "seedkit/generate"` etc. `@seedkit/core` permanece workspace-only y se bundlea con tsup.
 
 ## 2. Más field types en `generate`
 

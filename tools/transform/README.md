@@ -4,24 +4,22 @@ Batch-transforms MDX/MD files by renaming, adding, or removing frontmatter/metad
 
 ## Usage
 
-Create a `transform.config.ts` in the directory where you want to run the tool, then:
-
 ```bash
-# From repo root
+# Run via npx (no install required)
+npx seedkit transform
+npx seedkit transform --dry-run  # Preview changes without writing files
+
+# Run from the monorepo
 pnpm transform
-```
-
-The `dryRun` flag can be set in the config file or via the CLI:
-
-```bash
-pnpm transform -- --dry-run
 ```
 
 ## Config
 
+Create a `transform.config.ts` in the directory where you want to run the command:
+
 ```ts
 // transform.config.ts
-import { defineConfig } from "@seedkit/transform"
+import { defineConfig } from "seedkit/transform"
 
 export default defineConfig({
   input: "./content/**/*.mdx",

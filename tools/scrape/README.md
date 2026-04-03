@@ -4,22 +4,23 @@ Scrapes web pages and converts them to MDX files. Supports crawling by CSS selec
 
 ## Usage
 
-Create a `scrape.config.ts` in the directory where you want the output, then:
-
 ```bash
-# From repo root
-pnpm scrape
+# Run via npx (no install required)
+npx seedkit scrape
+npx seedkit scrape --dry-run        # Discover pages and preview output paths without fetching
+npx seedkit scrape --skip-existing  # Skip pages whose output file already exists
 
-# With flags
-pnpm scrape -- --dry-run        # Discover pages and preview output paths without fetching
-pnpm scrape -- --skip-existing  # Skip pages whose output file already exists
+# Run from the monorepo
+pnpm scrape
 ```
 
 ## Config
 
+Create a `scrape.config.ts` in the directory where you want the output:
+
 ```ts
 // scrape.config.ts
-import { defineConfig } from "@seedkit/scrape"
+import { defineConfig } from "seedkit/scrape"
 
 export default defineConfig({
   startUrl: "https://example.com/docs",
@@ -99,8 +100,8 @@ Fields extracted from each page and written to the file header.
 ```ts
 images: {
   download: true,
-  publicDir: "./public",   // images saved to publicDir/slug/images/
-  lightDark: true,         // pair .light.png / .dark.png into <Image> components
+  publicDir: "./public",  // images saved to publicDir/slug/images/
+  lightDark: true,        // pair .light.png / .dark.png into <Image> components
 }
 ```
 

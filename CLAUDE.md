@@ -32,10 +32,14 @@ pnpm release:patch  # non-interactive patch release
 ## Architecture
 
 - Tools are not libraries — they run from the user's cwd and read a local config file
-- Config files (`generate.config.ts`, etc.) are TypeScript, loaded via dynamic `import()` and validated with Zod
-- `@seedkit/core` is a workspace-only package (`workspace:*`), not published to npm
-- All tools use `tsx` at runtime — no build step required for development
+- Config files (`generate.config.ts`, etc.) are TypeScript, loaded via `jiti` (no tsx required at runtime) and validated with Zod
+- `@seedkit/core` is a workspace-only package (`workspace:*`), not published to npm — bundled inline by tsup
+- `src/` at root contains the publishable CLI; `tsup` builds it to `dist/`
+- `src/{generate,scrape,transform}-api.ts` export `defineConfig` as `seedkit/generate` etc. for external users
+- For external use: `import { defineConfig } from "seedkit/generate"` (published subpath exports)
+- For monorepo dev: `import { defineConfig } from "@seedkit/core"` (workspace package)
 - Output format can be `frontmatter` (YAML) or `metadata-export` (`export const metadata = {}`)
+- `pnpm build` compiles the CLI (`tsup`); `pnpm build:packages` compiles individual tool packages (`tsc`)
 
 ## Conventions
 
