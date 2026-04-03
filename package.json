@@ -2,6 +2,7 @@
   "name": "seedkit",
   "version": "0.0.0",
   "private": true,
+  "author": "Anuar Reyes <anuar@hey.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/anuarhdz/seedkit"
