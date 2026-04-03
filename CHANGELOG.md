@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## <small>0.1.1 (2026-04-03)</small>
+
+- feat: add --version / -v flag to CLI ([d6dd9b9](https://github.com/anuarhdz/seedkit/commit/d6dd9b9))
+- feat: generate .d.ts declaration files for subpath exports ([1de21af](https://github.com/anuarhdz/seedkit/commit/1de21af))
+- docs: add TypeScript IDE setup note to READMEs and roadmap ([5fcead3](https://github.com/anuarhdz/seedkit/commit/5fcead3))
+- chore: add version flag to roadmap ([d5098d1](https://github.com/anuarhdz/seedkit/commit/d5098d1))
+
 ## 0.1.0 (2026-04-03)
 
 - docs: update READMEs and guides for npx usage pattern ([d14c4a8](https://github.com/anuarhdz/seedkit/commit/d14c4a8))
