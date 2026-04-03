@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.2.0 (2026-04-03)
+
+- feat: add --help flag, transform-value and set-field-if operations; update docs ([df0a525](https://github.com/anuarhdz/seedkit/commit/df0a525))
+- feat: add new field types to generate and scrape tools ([60a6efa](https://github.com/anuarhdz/seedkit/commit/60a6efa))
+
 ## <small>0.1.3 (2026-04-03)</small>
 
 - fix: include url-slug fields in frontmatter output ([3ce43d4](https://github.com/anuarhdz/seedkit/commit/3ce43d4))
