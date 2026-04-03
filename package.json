@@ -1,12 +1,27 @@
 {
   "name": "seedkit",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "CLI tools for generating and transforming MDX demo content",
   "author": "Anuar Reyes <anuar@hey.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/anuarhdz/seedkit"
   },
+  "homepage": "https://github.com/anuarhdz/seedkit",
+  "keywords": [
+    "mdx",
+    "cli",
+    "content",
+    "generate",
+    "scrape",
+    "transform",
+    "demo",
+    "faker"
+  ],
+  "files": [
+    "README.md"
+  ],
   "type": "module",
   "scripts": {
     "build": "pnpm -r run build",
