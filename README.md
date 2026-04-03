@@ -1,4 +1,4 @@
-# mdx-cli-tools
+# seedkit
 
 A pnpm monorepo of CLI tools for generating and transforming MDX content — primarily for demo data and local development.
 
