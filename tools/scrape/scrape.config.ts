@@ -23,6 +23,7 @@ export default defineConfig({
 
   schema: {
     title: { type: "selector", selector: "h1", extract: "text" },
+    label: { type: "selector", selector: "h1", extract: "text" },
     summary: {
       type: "selector",
       selector: 'meta[name="description"]',
