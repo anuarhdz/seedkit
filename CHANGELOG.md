@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## <small>0.1.2 (2026-04-03)</small>
+
+- fix: derive image URL path from publicDir instead of hardcoding /content/ ([03cdb78](https://github.com/anuarhdz/seedkit/commit/03cdb78))
+
 ## <small>0.1.1 (2026-04-03)</small>
 
 - feat: add --version / -v flag to CLI ([d6dd9b9](https://github.com/anuarhdz/seedkit/commit/d6dd9b9))
