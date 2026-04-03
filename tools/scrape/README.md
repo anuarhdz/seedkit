@@ -7,6 +7,17 @@ Scrapes web pages and converts them to MDX files. Supports crawling by CSS selec
 ```bash
 # Run via npx (no install required)
 npx seedkit scrape
+```
+
+> **TypeScript types in your editor:** Install `seedkit` as a dev dependency so your IDE resolves the `defineConfig` import:
+>
+> ```bash
+> pnpm add -D seedkit
+> ```
+>
+> This is optional — the CLI works without it.
+
+```bash
 npx seedkit scrape --dry-run        # Discover pages and preview output paths without fetching
 npx seedkit scrape --skip-existing  # Skip pages whose output file already exists
 

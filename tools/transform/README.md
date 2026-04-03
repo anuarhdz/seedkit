@@ -7,6 +7,17 @@ Batch-transforms MDX/MD files by renaming, adding, or removing frontmatter/metad
 ```bash
 # Run via npx (no install required)
 npx seedkit transform
+```
+
+> **TypeScript types in your editor:** Install `seedkit` as a dev dependency so your IDE resolves the `defineConfig` import:
+>
+> ```bash
+> pnpm add -D seedkit
+> ```
+>
+> This is optional — the CLI works without it.
+
+```bash
 npx seedkit transform --dry-run  # Preview changes without writing files
 
 # Run from the monorepo

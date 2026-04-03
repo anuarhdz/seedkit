@@ -27,9 +27,18 @@
     "seedkit": "./dist/cli.js"
   },
   "exports": {
-    "./generate": "./dist/generate-api.js",
-    "./scrape": "./dist/scrape-api.js",
-    "./transform": "./dist/transform-api.js"
+    "./generate": {
+      "types": "./dist/generate-api.d.ts",
+      "default": "./dist/generate-api.js"
+    },
+    "./scrape": {
+      "types": "./dist/scrape-api.d.ts",
+      "default": "./dist/scrape-api.js"
+    },
+    "./transform": {
+      "types": "./dist/transform-api.d.ts",
+      "default": "./dist/transform-api.js"
+    }
   },
   "type": "module",
   "scripts": {
